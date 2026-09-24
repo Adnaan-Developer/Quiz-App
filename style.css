@@ -1,0 +1,135 @@
+@import url('https://fonts.googleapis.com/css2?family=Google+Sans:ital,opsz,wght@0,17..18,400..700;1,17..18,400..700&family=Kaushan+Script&family=Stack+Sans+Text:wght@200..700&family=Story+Script&display=swap');
+
+body {
+    font-family: 'Google Sans', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif ;
+    font-weight: 400;
+    font-style: normal;
+    min-height: 100dvh;
+    display: flex;
+    flex-direction: column;
+}
+
+.progress.apple-glass {
+    background-color: rgba(255, 255, 255, 0.4) !important;
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.25);
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.05);
+}
+
+.apple-glass .progress-bar {
+    background: linear-gradient(90deg, #007aff, #00c7ff);
+    box-shadow: 0 0 10px rgba(0, 122, 255, 0.5);
+    transition: width 0.4s ease-out;
+}
+
+.score-div {
+    margin-top: 2rem;
+    background: linear-gradient(90deg, #97F9F9, #A4DEF9);
+    transition: width 0.4s ease-out;
+    border-radius: 1rem;
+}
+
+.content {
+    flex: 1;
+}
+
+.check {
+    color: white;
+}
+
+.check-bg {
+    color: rgba(3, 249, 56, 0.54);
+    animation: spin 2s linear infinite;
+    transform-origin: center;
+}
+
+@keyframes spin {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+.submit-page {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: 5rem 0 10rem 0;
+    font-size: 2.5rem;
+}
+
+.show-score {
+    padding: 2rem;
+}
+
+@media (max-width: 576px) {
+    footer ul {
+        margin: auto;
+    }
+    .submit-page {
+        font-size: 2rem;
+        margin: 2rem 0 4rem 0;
+    }
+}
+
+.intro-screen {
+    position: fixed;
+    inset: 0;
+    background-image: url(germany\ castle.png);
+    background-repeat: no-repeat;
+    background-size: cover ;
+    z-index: 9999;
+    animation: introFade 1s ease 2s forwards;
+}
+
+.quiz-app {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    backdrop-filter: blur(10px);
+    height: 100vh;
+    width: 100%;
+    background: rgba(255, 255, 255, 0.1);
+    padding: 30px;
+    border-radius: 10px;
+    color: #fff;
+}
+
+.quiz-app h2{
+    text-align: center;
+    font-family: 'Kaushan-script';
+    font-size: 10rem;
+    font-style: italic;
+    color: white;
+
+    animation: helloAnimation 2s ease forwards;
+}
+
+@keyframes helloAnimation {
+    0% {
+        opacity: 0;
+        transform: scale(0.8);
+        clip-path: inset(0 100% 0 0);
+    }
+
+    50% {
+        opacity: 1;
+    }
+
+    100% {
+        opacity: 1;
+        transform: scale(1);
+        clip-path: inset(0 0 0 0);
+    }
+}
+
+@keyframes introFade {
+    to {
+        opacity: 0;
+        visibility: hidden;
+    }
+}
