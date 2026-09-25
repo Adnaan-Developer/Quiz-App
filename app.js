@@ -1,20 +1,30 @@
+// 1. DOM ELEMENT SELECTIONS
+
 let questionText = document.querySelector(".question-text");
 let optionA = document.querySelector("label[for='optionA']");
 let optionB = document.querySelector("label[for='optionB']");
 let optionC = document.querySelector("label[for='optionC']");
 let optionD = document.querySelector("label[for='optionD']");
+
+// Navigation buttons
 let nextBtn = document.querySelector(".next-btn");
 let backBtn = document.querySelector(".back-btn");
+
+// UI displays and error messaging
 let questionNumber = document.querySelector(".question-no");
 let score = document.querySelector(".score");
 let radioCheck = document.querySelectorAll(".form-check input");
 let showError = document.querySelector(".error");
 let progressDiv = document.querySelector(".progress-bar");
+
+// Screen/Page wrappers
 let allContent = document.querySelector(".content");
 let submitPage = document.querySelector(".submit-page");
 let showScore = document.querySelector(".show-score");
 let restartQuiz = document.querySelector(".restart-quiz");
 
+// 2. QUIZ DATA & STATE VARIABLES
+// Array containing all quiz questions, options, and correct answers
 let questionObjects = [{
     question: "What is the purpose of an 'if' statement in a computer program?",
     optionA: "A. To loop through a list of items a million times automatically",
@@ -94,14 +104,21 @@ let questionObjects = [{
     optionC: "C. Using a mix of uppercase and lowercase letters, numbers, and symbols with adequate length",
     optionD: "D. Using the exact same password for every single website you visit",
     answer: "C"
-}]
+}];
 
+// Tracking application state
 let questionResults = [];
 let currentQuestion = 0;
+let userAnswer = [];
+let scoreNumber = 0;
+
+// Initial progress bar render
 progressBar();
 
-let userAnswer = [];
-
+// 3. EVENT LISTENERS & LOGIC
+/* Handles 'Next' / 'Submit' button click logic.
+Validates selection, saves answer, updates UI, and routes to completion screen.
+ */
 nextBtn.addEventListener("click", () => {
     let selectedRadio = document.querySelector("input[name='radioDefault']:checked");
     if (!selectedRadio) {
@@ -132,6 +149,7 @@ nextBtn.addEventListener("click", () => {
     }
 });
 
+// Handles 'Back' button click to let users review previous questions.
 backBtn.addEventListener("click", () => {
     if (currentQuestion >= 1) {
         currentQuestion--;
@@ -142,6 +160,8 @@ backBtn.addEventListener("click", () => {
     displayQuestion();
 });
 
+// 4. HELPER FUNCTIONS
+// Populates DOM elements with question text and options based on current index.
 function displayQuestion() {
     questionText.innerText = questionObjects[currentQuestion].question;
 
@@ -151,10 +171,7 @@ function displayQuestion() {
     optionD.innerText = questionObjects[currentQuestion].optionD;
 }
 
-console.log(questionObjects)
-
-let scoreNumber = 0;
-
+// Stores user selection, checks against answer key, and updates the total score UI.
 function saveAnswerAndUpdateScore(selectedRadio) {
     userAnswer[currentQuestion] = selectedRadio.value;
 
@@ -163,21 +180,23 @@ function saveAnswerAndUpdateScore(selectedRadio) {
 
     scoreNumber = questionResults.filter(result => result === true).length;
 
-    score.innerText = `Score: ${scoreNumber}/${questionObjects.length}`
-    console.log(scoreNumber);
+    score.innerText = `Score: ${scoreNumber}/${questionObjects.length}`;
 }
 
+// Calculates and sets progress bar percentage and CSS width.
 function progressBar() {
     progressDiv.innerText = `${(currentQuestion + 1) / questionObjects.length * 100}%`;
     progressDiv.style.width = `${(currentQuestion + 1) / questionObjects.length * 100}%`;
 }
 
+// Restores previously checked radio button when navigating through questions.
 function restoreAnswer() {
     radioCheck.forEach(radio => {
         radio.checked = radio.value === userAnswer[currentQuestion];
     });
 }
 
+// Resets the entire quiz to its initial state when 'Restart' is clicked.
 restartQuiz.addEventListener("click", () => {
     currentQuestion = 0;
     questionResults = [];
@@ -196,10 +215,10 @@ restartQuiz.addEventListener("click", () => {
     });
 
     progressBar();
-
     displayQuestion();
 });
 
+// Ensures initial question loads once DOM assets finish parsing.
 window.addEventListener("DOMContentLoaded", () => {
     displayQuestion();
 });
