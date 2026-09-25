@@ -79,7 +79,7 @@ body {
 .intro-screen {
     position: fixed;
     inset: 0;
-    background-image: url(germany\ castle.png);
+    background-image: url(tree.png);
     background-repeat: no-repeat;
     background-size: cover ;
     z-index: 9999;

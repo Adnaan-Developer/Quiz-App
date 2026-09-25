@@ -169,7 +169,7 @@ function saveAnswerAndUpdateScore(selectedRadio) {
 
 function progressBar() {
     progressDiv.innerText = `${(currentQuestion + 1) / questionObjects.length * 100}%`;
-    progressDiv.style.width = `${(currentQuestion + 1) / questionObjects.length * 100 }%`;
+    progressDiv.style.width = `${(currentQuestion + 1) / questionObjects.length * 100}%`;
 }
 
 function restoreAnswer() {
@@ -184,13 +184,22 @@ restartQuiz.addEventListener("click", () => {
     userAnswer = [];
     scoreNumber = 0;
 
+    submitPage.classList.add("d-none");
+    allContent.classList.remove("d-none");
+
     nextBtn.innerText = "Next";
     score.innerText = `Score: 0/${questionObjects.length}`;
+    questionNumber.innerText = `Question 1 of ${questionObjects.length}`;
+    showError.innerText = "";
+    radioCheck.forEach(radio => {
+        radio.checked = false;
+    });
 
-    submitPage.classList.add("d-none");
-    allContent.classList.remove("d-none");  
+    progressBar();
 
-    questionNumber.innerText = ""
+    displayQuestion();
 });
 
-window.addEventListener("DOMContentLoaded", displayQuestion);
+window.addEventListener("DOMContentLoaded", () => {
+    displayQuestion();
+});
