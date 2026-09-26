@@ -156,6 +156,7 @@ backBtn.addEventListener("click", () => {
         questionNumber.innerText = `Question ${currentQuestion + 1} of ${questionObjects.length}`;
         restoreAnswer();
         progressBar();
+        nextBtn.innerText = "Next";
     }
     displayQuestion();
 });
